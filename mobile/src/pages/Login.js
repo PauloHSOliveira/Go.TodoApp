@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView,
     View,
@@ -7,11 +7,40 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
+    AsyncStorage,
 } from 'react-native';
 
 import goTodoapp from '../assets/goTodoApp.png';
+import api from '../services/api';
 
-export default function Login() {
+export default function Login({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        AsyncStorage.getItem('user').then(user => {
+            if (user) {
+                navigation.navigate('MenuList');
+            }
+        });
+    }, []);
+
+    async function handleSubtmit(action) {
+        if (action === 'login') {
+            const response = await api.post('/login', {
+                email,
+                password,
+            });
+
+            const { _id } = response.data;
+
+            await AsyncStorage.setItem('user', _id);
+            navigation.navigate('MenuList');
+        } else {
+            navigation.navigate('Register');
+        }
+    }
+
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <Image source={goTodoapp} style={styles.logo} />
@@ -23,7 +52,10 @@ export default function Login() {
                     placeholderTextColor="#9F9F9F"
                     keyboardType="email-address"
                     autoCapitalize="none"
+                    returnKeyType="next"
                     autoCorrect={false}
+                    value={email}
+                    onChangeText={setEmail}
                 />
 
                 <TextInput
@@ -31,20 +63,27 @@ export default function Login() {
                     placeholder="Insira sua senha"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
+                    returnKeyType="google"
                     autoCorrect={false}
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
                 />
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                    onPress={() => handleSubtmit('login')}
+                    style={styles.button}
+                >
                     <Text style={styles.textButton}>Login</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.registerForm}>
                 <Text style={styles.textRegister}>Ainda não possuí conta?</Text>
-
-                <Text style={styles.textRegister}>Registre-se agora!</Text>
-
-                <TouchableOpacity style={styles.registerBtn}>
-                    <Text style={styles.textBtnRegister}>Registrar</Text>
+                <TouchableOpacity
+                    onPress={() => handleSubtmit('register')}
+                    style={styles.registerBtn}
+                >
+                    <Text style={styles.textBtnRegister}>Registre-se</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -70,7 +109,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderColor: '#9F9F9F',
         paddingHorizontal: 20,
         fontSize: 16,
@@ -88,6 +127,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'flex-end',
         borderRadius: 5,
+        marginTop: 20,
+        padding: 10,
     },
 
     textButton: {
@@ -108,17 +149,11 @@ const styles = StyleSheet.create({
     },
 
     registerBtn: {
-        borderWidth: 2,
         width: 100,
         height: 50,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderLeftColor: '#B2FFFA',
-        borderRightColor: '#B2FFC8',
-        borderTopColor: '#F9B2FF',
-        borderBottomColor: '#FFF7B2',
         borderRadius: 5,
-        marginTop: 30,
+        marginTop: 10,
     },
 
     textBtnRegister: {

@@ -28,6 +28,17 @@ class ListController {
 
         return res.status(200).json(list);
     }
+
+    async index(req, res) {
+        const { user_id } = req.headers;
+
+        const list = await List.find({ owner: user_id });
+        if (!list) {
+            return res.status(400).json({ message: 'the user has no lists' });
+        }
+
+        return res.status(200).json(list);
+    }
 }
 
 export default new ListController();
