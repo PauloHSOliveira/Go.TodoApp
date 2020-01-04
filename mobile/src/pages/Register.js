@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
     button: {
         backgroundColor: '#B2FFC8',
-        width: 100,
+        width: 110,
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
     textButton: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 16,
     },
 
     buttonReturn: {

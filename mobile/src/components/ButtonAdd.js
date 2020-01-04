@@ -12,9 +12,18 @@ function ButtonAdd({ navigation }) {
 
         navigation.navigate('Login');
     }
+
+    async function addNewList() {
+        navigation.navigate('addList');
+    }
+
     return (
         <ActionButton buttonColor="rgba(151,229,239,1)">
-            <ActionButton.Item buttonColor="#B2FFC8" title="Add new list">
+            <ActionButton.Item
+                buttonColor="#B2FFC8"
+                title="Nova Lista"
+                onPress={addNewList}
+            >
                 <Icon name="md-create" size={20} color="#fff" height={22} />
             </ActionButton.Item>
             <ActionButton.Item

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
 
     registerBtn: {
-        width: 100,
+        width: 110,
         height: 50,
         alignItems: 'center',
         borderRadius: 5,
