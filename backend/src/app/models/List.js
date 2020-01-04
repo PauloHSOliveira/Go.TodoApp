@@ -4,6 +4,7 @@ const ListSchema = new mongoose.Schema(
     {
         name: {
             type: String,
+            uppercase: true,
             required: true,
         },
         tasks: [],
