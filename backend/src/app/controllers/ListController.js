@@ -34,7 +34,7 @@ class ListController {
 
         const list = await List.find({ owner: user_id });
         if (!list) {
-            return res.status(400).json({ message: 'the user has no lists' });
+            return res.status(400).json({ error: 'the user has no lists' });
         }
 
         return res.status(200).json(list);

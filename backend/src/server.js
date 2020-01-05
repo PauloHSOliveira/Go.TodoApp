@@ -26,4 +26,4 @@ requireDir('./app/models');
 
 app.use('/', routes);
 
-server.listen(port, () => console.log(`Server running`));
+server.listen(port, () => console.log(`Server running on port ${port}`));
