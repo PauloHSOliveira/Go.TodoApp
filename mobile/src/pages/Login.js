@@ -6,12 +6,12 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    StyleSheet,
     AsyncStorage,
 } from 'react-native';
 
 import goTodoapp from '../assets/goTodoApp.png';
 import api from '../services/api';
+import Styles from './styles/styles';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -25,29 +25,25 @@ export default function Login({ navigation }) {
         });
     }, []);
 
-    async function handleSubtmit(action) {
-        if (action === 'login') {
-            const response = await api.post('/login', {
-                email,
-                password,
-            });
+    async function handleSubtmit() {
+        const response = await api.post('/login', {
+            email,
+            password,
+        });
 
-            const { _id } = response.data;
+        const { _id } = response.data;
 
-            await AsyncStorage.setItem('user', _id);
-            navigation.navigate('MenuList');
-        } else {
-            navigation.navigate('Register');
-        }
+        await AsyncStorage.setItem('user', _id);
+        navigation.navigate('MenuList');
     }
 
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <Image source={goTodoapp} style={styles.logo} />
+        <KeyboardAvoidingView behavior="padding" style={Styles.container}>
+            <Image source={goTodoapp} style={Styles.logo} />
 
-            <View style={styles.form}>
+            <View style={Styles.form}>
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira seu e-mail"
                     placeholderTextColor="#9F9F9F"
                     keyboardType="email-address"
@@ -59,7 +55,7 @@ export default function Login({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira sua senha"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
@@ -70,95 +66,19 @@ export default function Login({ navigation }) {
                     onChangeText={setPassword}
                 />
 
-                <TouchableOpacity
-                    onPress={() => handleSubtmit('login')}
-                    style={styles.button}
-                >
-                    <Text style={styles.textButton}>Login</Text>
+                <TouchableOpacity onPress={handleSubtmit} style={Styles.button}>
+                    <Text style={Styles.textButton}>Login</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.registerForm}>
-                <Text style={styles.textRegister}>Ainda não possuí conta?</Text>
+            <View style={Styles.registerForm}>
+                <Text style={Styles.textRegister}>Ainda não possuí conta?</Text>
                 <TouchableOpacity
-                    onPress={() => handleSubtmit('register')}
-                    style={styles.registerBtn}
+                    onPress={() => navigation.navigate('Register')}
+                    style={Styles.registerBtn}
                 >
-                    <Text style={styles.textBtnRegister}>Registre-se</Text>
+                    <Text style={Styles.textBtnRegister}>Registre-se</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    logo: {
-        width: 150,
-        height: 150,
-    },
-
-    form: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 20,
-    },
-
-    input: {
-        borderBottomWidth: 1,
-        borderColor: '#9F9F9F',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        color: '#9F9F9F',
-        height: 44,
-        marginBottom: 20,
-        borderRadius: 5,
-    },
-
-    button: {
-        backgroundColor: '#B2FFC8',
-        width: 100,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-end',
-        borderRadius: 5,
-        marginTop: 20,
-        padding: 10,
-    },
-
-    textButton: {
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-
-    registerForm: {
-        marginTop: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    textRegister: {
-        fontSize: 16,
-        paddingHorizontal: 10,
-        marginTop: 5,
-    },
-
-    registerBtn: {
-        width: 110,
-        height: 50,
-        alignItems: 'center',
-        borderRadius: 5,
-        marginTop: 10,
-    },
-
-    textBtnRegister: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: '#18F2E5',
-    },
-});

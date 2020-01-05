@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import api from '../services/api';
+import Styles from './styles/styles';
 
 Icon.loadFont();
 
@@ -53,18 +54,18 @@ export default function addList({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.container}>
             <TouchableOpacity
-                style={styles.buttonReturn}
+                style={Styles.buttonReturn}
                 onPress={handleReturn}
             >
-                <Text style={styles.textButton}>Voltar</Text>
+                <Text style={Styles.textButton}>Voltar</Text>
             </TouchableOpacity>
             <Text style={styles.title}>Nova Lista</Text>
 
-            <View style={styles.form}>
+            <View style={Styles.form}>
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira o nome da lista"
                     placeholderTextColor="#9F9F9F"
                     autoCapitalize="none"
@@ -75,7 +76,7 @@ export default function addList({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Tarefas"
                     placeholderTextColor="#9F9F9F"
                     autoCapitalize="none"
@@ -86,7 +87,7 @@ export default function addList({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira o dia de início"
                     placeholderTextColor="#9F9F9F"
                     autoCapitalize="none"
@@ -97,7 +98,7 @@ export default function addList({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira a data final"
                     placeholderTextColor="#9F9F9F"
                     autoCapitalize="none"
@@ -161,7 +162,7 @@ export default function addList({ navigation }) {
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                    <Text style={styles.textButton}>Adicionar</Text>
+                    <Text style={Styles.textButton}>Adicionar</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -169,31 +170,9 @@ export default function addList({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-    },
-
-    form: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 20,
-    },
-
-    input: {
-        borderBottomWidth: 1,
-        borderColor: '#9F9F9F',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        color: '#9F9F9F',
-        height: 44,
-        marginBottom: 20,
-        borderRadius: 5,
     },
 
     button: {
@@ -209,23 +188,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-
-    textButton: {
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-
-    buttonReturn: {
-        backgroundColor: '#FFB2B2',
-        width: 100,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-start',
-        borderRadius: 5,
-        marginLeft: 20,
-        padding: 10,
-        flexDirection: 'row',
     },
 });

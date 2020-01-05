@@ -6,13 +6,13 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    StyleSheet,
     AsyncStorage,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import goTodoapp from '../assets/goTodoApp.png';
 import api from '../services/api';
+import Styles from './styles/styles';
 
 Icon.loadFont();
 
@@ -29,30 +29,26 @@ export default function Login({ navigation }) {
         });
     }, []);
 
-    async function handleSubtmit(action) {
-        if (action === 'register') {
-            const response = await api.post('/register', {
-                username,
-                email,
-                password,
-            });
+    async function handleSubtmit() {
+        const response = await api.post('/register', {
+            username,
+            email,
+            password,
+        });
 
-            const { _id } = response.data;
+        const { _id } = response.data;
 
-            await AsyncStorage.setItem('user', _id);
-            navigation.navigate('MenuList');
-        } else {
-            navigation.navigate('Login');
-        }
+        await AsyncStorage.setItem('user', _id);
+        navigation.navigate('MenuList');
     }
 
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <Image source={goTodoapp} style={styles.logo} />
+        <KeyboardAvoidingView behavior="padding" style={Styles.container}>
+            <Image source={goTodoapp} style={Styles.logo} />
 
-            <View style={styles.form}>
+            <View style={Styles.form}>
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira seu username"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
@@ -63,7 +59,7 @@ export default function Login({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira seu e-mail"
                     placeholderTextColor="#9F9F9F"
                     keyboardType="email-address"
@@ -75,7 +71,7 @@ export default function Login({ navigation }) {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={Styles.input}
                     placeholder="Insira sua senha"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
@@ -85,10 +81,10 @@ export default function Login({ navigation }) {
                     value={password}
                     onChangeText={setPassword}
                 />
-                <View style={styles.areaBtns}>
+                <View style={Styles.areaBtns}>
                     <TouchableOpacity
-                        style={styles.buttonReturn}
-                        onPress={() => handleSubtmit('voltar')}
+                        style={Styles.buttonReturn}
+                        onPress={() => navigation.navigate('Login')}
                     >
                         <Icon
                             name="ios-exit"
@@ -96,81 +92,16 @@ export default function Login({ navigation }) {
                             color="#fff"
                             style={{ transform: [{ rotate: '180deg' }] }}
                         />
-                        <Text style={styles.textButton}>Voltar</Text>
+                        <Text style={Styles.textButton}>Voltar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => handleSubtmit('register')}
-                        style={styles.button}
+                        onPress={handleSubtmit}
+                        style={Styles.button}
                     >
-                        <Text style={styles.textButton}>Registrar</Text>
+                        <Text style={Styles.textButton}>Registrar</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         </KeyboardAvoidingView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    logo: {
-        width: 150,
-        height: 150,
-    },
-
-    form: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 20,
-    },
-
-    input: {
-        borderBottomWidth: 1,
-        borderColor: '#9F9F9F',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        color: '#9F9F9F',
-        height: 44,
-        marginBottom: 20,
-        borderRadius: 5,
-    },
-
-    button: {
-        backgroundColor: '#B2FFC8',
-        width: 110,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-end',
-        borderRadius: 5,
-        marginTop: 20,
-        padding: 10,
-    },
-
-    textButton: {
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-
-    buttonReturn: {
-        backgroundColor: '#FFB2B2',
-        width: 100,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-start',
-        borderRadius: 5,
-        marginTop: 20,
-        padding: 10,
-        flexDirection: 'row',
-    },
-
-    areaBtns: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-});

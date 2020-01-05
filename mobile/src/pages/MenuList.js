@@ -46,6 +46,7 @@ export default function MenuList() {
                             backgroundColor: item.color,
                             height: 100,
                             width: 350,
+                            maxWidth: 450,
                             alignSelf: 'center',
                             marginTop: 20,
                             borderRadius: 5,
