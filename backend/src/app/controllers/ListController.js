@@ -39,6 +39,22 @@ class ListController {
 
         return res.status(200).json(list);
     }
+
+    async indexOne(req, res) {
+        const { id } = req.headers;
+
+        const list = await List.findById(id);
+
+        return res.status(200).json(list);
+    }
+
+    async delete(req, res) {
+        const { id } = req.headers;
+
+        const list = await List.findByIdAndDelete(id);
+
+        return res.status(200).json(list);
+    }
 }
 
 export default new ListController();
