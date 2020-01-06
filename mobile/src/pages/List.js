@@ -11,6 +11,8 @@ export default function List({ navigation }) {
     const [title, setTitle] = useState('');
     const [state, setState] = useState('');
     const [color, setColor] = useState('');
+    const [init, setInit] = useState('');
+    const [end, setEnd] = useState('');
 
     const [load, setLoad] = useState(false);
 
@@ -56,10 +58,15 @@ export default function List({ navigation }) {
                 backgroundColor: color,
             }}
         >
-            <Text>{title}</Text>
-            <TouchableOpacity onPress={handleDelete}>
-                <Icon name="delete-sweep" size={50} />
-            </TouchableOpacity>
+            <View style={Styles.header}>
+                <TouchableOpacity>
+                    <Icon name="edit" size={40} />
+                </TouchableOpacity>
+                <Text>{title}</Text>
+                <TouchableOpacity onPress={handleDelete}>
+                    <Icon name="delete-sweep" size={50} />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }

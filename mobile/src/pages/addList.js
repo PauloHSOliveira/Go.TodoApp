@@ -7,6 +7,7 @@ import {
     StyleSheet,
     AsyncStorage,
 } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import api from '../services/api';
@@ -56,14 +57,21 @@ export default function addList({ navigation }) {
     return (
         <View style={Styles.container}>
             <TouchableOpacity
-                style={Styles.buttonReturn}
+                style={{
+                    backgroundColor: '#FFB2B2',
+                    alignSelf: 'flex-start',
+                    marginLeft: 20,
+                    ...Styles.button,
+                }}
                 onPress={handleReturn}
             >
                 <Text style={Styles.textButton}>Voltar</Text>
             </TouchableOpacity>
             <Text style={styles.title}>Nova Lista</Text>
 
-            <View style={Styles.form}>
+            <View
+                style={{ paddingHorizontal: 30, marginTop: 20, ...Styles.form }}
+            >
                 <TextInput
                     style={Styles.input}
                     placeholder="Insira o nome da lista"
@@ -86,76 +94,97 @@ export default function addList({ navigation }) {
                     onChangeText={setTasks}
                 />
 
-                <TextInput
-                    style={Styles.input}
-                    placeholder="Insira o dia de início"
-                    placeholderTextColor="#9F9F9F"
-                    autoCapitalize="none"
-                    returnKeyType="next"
-                    autoCorrect={false}
-                    value={init}
-                    onChangeText={setInit}
+                <Text style={Styles.textlist}>Inicio:</Text>
+
+                <DatePicker
+                    style={{ width: 300, marginTop: 10 }}
+                    date={init}
+                    mode="date"
+                    placeholder=" "
+                    format="DD-MM-YYYY"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 0,
+                            marginLeft: 0,
+                        },
+                        dateInput: {
+                            borderBottomWidth: 1,
+                            borderTopWidth: 0,
+                            borderRightWidth: 0,
+                            borderLeftWidth: 0,
+                            ...Styles.input,
+                        },
+                    }}
+                    onDateChange={newDate => setInit(newDate)}
                 />
 
-                <TextInput
-                    style={Styles.input}
-                    placeholder="Insira a data final"
-                    placeholderTextColor="#9F9F9F"
-                    autoCapitalize="none"
-                    returnKeyType="next"
-                    autoCorrect={false}
-                    value={end}
-                    onChangeText={setEnd}
-                />
+                <Text style={Styles.textlist}>Fim:</Text>
 
+                <DatePicker
+                    style={{
+                        width: 300,
+                        marginTop: 10,
+                    }}
+                    date={end}
+                    mode="date"
+                    placeholder=" "
+                    format="DD-MM-YYYY"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 0,
+                            marginLeft: 0,
+                        },
+                        dateInput: {
+                            borderBottomWidth: 1,
+                            borderTopWidth: 0,
+                            borderRightWidth: 0,
+                            borderLeftWidth: 0,
+                            ...Styles.input,
+                        },
+                    }}
+                    onDateChange={newDate => setEnd(newDate)}
+                />
                 <View style={styles.colors}>
                     <TouchableOpacity
                         style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 50,
                             backgroundColor: '#B2FFFA',
-                            margin: 10,
+                            ...Styles.colorPicker,
                         }}
                         onPress={() => selectColor('#B2FFFA')}
                     />
                     <TouchableOpacity
                         style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 50,
                             backgroundColor: '#F9B2FF',
-                            margin: 10,
+                            ...Styles.colorPicker,
                         }}
                         onPress={() => selectColor('#F9B2FF')}
                     />
                     <TouchableOpacity
                         style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 50,
                             backgroundColor: '#FFB2B2',
-                            margin: 10,
+                            ...Styles.colorPicker,
                         }}
                         onPress={() => selectColor('#FFB2B2')}
                     />
                     <TouchableOpacity
                         style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 50,
                             backgroundColor: '#B2FFC8',
-                            margin: 10,
+                            ...Styles.colorPicker,
                         }}
                         onPress={() => selectColor('#B2FFC8')}
                     />
                     <TouchableOpacity
                         style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 50,
                             backgroundColor: '#FFED8D',
-                            margin: 10,
+                            ...Styles.colorPicker,
                         }}
                         onPress={() => selectColor('#FFED8D')}
                     />

@@ -41,7 +41,9 @@ export default function Login({ navigation }) {
         <KeyboardAvoidingView behavior="padding" style={Styles.container}>
             <Image source={goTodoapp} style={Styles.logo} />
 
-            <View style={Styles.form}>
+            <View
+                style={{ paddingHorizontal: 30, marginTop: 20, ...Styles.form }}
+            >
                 <TextInput
                     style={Styles.input}
                     placeholder="Insira seu e-mail"
@@ -66,7 +68,16 @@ export default function Login({ navigation }) {
                     onChangeText={setPassword}
                 />
 
-                <TouchableOpacity onPress={handleSubtmit} style={Styles.button}>
+                <TouchableOpacity
+                    onPress={handleSubtmit}
+                    style={{
+                        marginTop: 20,
+                        marginRight: 10,
+                        backgroundColor: '#B2FFC8',
+                        alignSelf: 'flex-end',
+                        ...Styles.button,
+                    }}
+                >
                     <Text style={Styles.textButton}>Login</Text>
                 </TouchableOpacity>
             </View>

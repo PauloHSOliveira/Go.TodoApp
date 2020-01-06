@@ -12,6 +12,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import Bar from '../components/Bar';
 import ButtonAdd from '../components/ButtonAdd';
+import DontLists from '../components/DontLists';
+
 import api from '../services/api';
 
 import Styles from './styles/styles';
@@ -43,7 +45,7 @@ export default function MenuList({ navigation }) {
         return (
             <View style={styles.container}>
                 <Bar />
-                <Text>Sem Lista</Text>
+                <DontLists />
                 <ButtonAdd />
             </View>
         );

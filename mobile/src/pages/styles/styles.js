@@ -14,8 +14,6 @@ const Styles = StyleSheet.create({
 
     form: {
         alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 20,
     },
 
     input: {
@@ -30,35 +28,17 @@ const Styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: '#B2FFC8',
         width: 110,
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'flex-end',
         borderRadius: 5,
-        marginTop: 20,
-        marginRight: 10,
         padding: 10,
     },
 
     textButton: {
         fontWeight: 'bold',
         fontSize: 16,
-    },
-
-    buttonReturn: {
-        backgroundColor: '#FFB2B2',
-        width: 110,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-start',
-        borderRadius: 5,
-        marginTop: 20,
-        marginLeft: 10,
-        padding: 10,
-        flexDirection: 'row',
     },
 
     registerForm: {
@@ -90,6 +70,24 @@ const Styles = StyleSheet.create({
     areaBtns: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+    },
+
+    textlist: {
+        fontWeight: 'bold',
+        color: '#999',
+    },
+
+    colorPicker: {
+        height: 30,
+        width: 30,
+        borderRadius: 50,
+        margin: 10,
+    },
+
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignSelf: 'stretch',
     },
 });
 

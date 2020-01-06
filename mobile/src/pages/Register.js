@@ -46,7 +46,9 @@ export default function Login({ navigation }) {
         <KeyboardAvoidingView behavior="padding" style={Styles.container}>
             <Image source={goTodoapp} style={Styles.logo} />
 
-            <View style={Styles.form}>
+            <View
+                style={{ paddingHorizontal: 30, marginTop: 20, ...Styles.form }}
+            >
                 <TextInput
                     style={Styles.input}
                     placeholder="Insira seu username"
@@ -83,7 +85,13 @@ export default function Login({ navigation }) {
                 />
                 <View style={Styles.areaBtns}>
                     <TouchableOpacity
-                        style={Styles.buttonReturn}
+                        style={{
+                            marginTop: 20,
+                            backgroundColor: '#FFB2B2',
+                            flexDirection: 'row',
+                            alignSelf: 'flex-start',
+                            ...Styles.button,
+                        }}
                         onPress={() => navigation.navigate('Login')}
                     >
                         <Icon
@@ -96,7 +104,11 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={handleSubtmit}
-                        style={Styles.button}
+                        style={{
+                            backgroundColor: '#B2FFC8',
+                            alignSelf: 'flex-end',
+                            ...Styles.button,
+                        }}
                     >
                         <Text style={Styles.textButton}>Registrar</Text>
                     </TouchableOpacity>

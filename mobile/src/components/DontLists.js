@@ -1,16 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image } from 'react-native';
+
+import Styles from '../pages/styles/styles';
+
+import illustration from '../assets/illustration.png';
 
 export default function DontList() {
     return (
-        <View styles={styles.container}>
-            <Text>Sem lista</Text>
+        <View>
+            <View
+                style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: 150,
+                    ...Styles.form,
+                }}
+            >
+                <Image source={illustration} style={Styles.logo} />
+                <Text style={Styles.textlist}>
+                    {'Você ainda não criou uma lista,\n' +
+                        '         ' +
+                        'clique em + para criar.'}
+                </Text>
+            </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});
