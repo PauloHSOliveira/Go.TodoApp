@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MenuList from './pages/MenuList';
 import addList from './pages/addList';
+import List from './pages/List';
 
 const Routes = createAppContainer(
     createSwitchNavigator({
@@ -11,6 +12,7 @@ const Routes = createAppContainer(
         Register,
         MenuList,
         addList,
+        List,
     })
 );
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+    ActivityIndicator,
     View,
     Text,
     StyleSheet,
@@ -13,9 +14,12 @@ import Bar from '../components/Bar';
 import ButtonAdd from '../components/ButtonAdd';
 import api from '../services/api';
 
+import Styles from './styles/styles';
+
 Icon.loadFont();
 
-export default function MenuList() {
+export default function MenuList({ navigation }) {
+    const [load, setLoad] = useState(false);
     const [lists, setLists] = useState([]);
 
     useEffect(() => {
@@ -24,12 +28,34 @@ export default function MenuList() {
             const response = await api.get('/lists', {
                 headers: { user_id: id },
             });
-
+            setLoad(true);
             setLists(response.data);
         }
 
         loadLists();
     }, []);
+
+    function handleSubmit(id) {
+        navigation.navigate('List', { id });
+    }
+
+    if (lists.length === 0) {
+        return (
+            <View style={styles.container}>
+                <Bar />
+                <Text>Sem Lista</Text>
+                <ButtonAdd />
+            </View>
+        );
+    }
+
+    if (!load) {
+        return (
+            <View style={Styles.container}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -51,6 +77,8 @@ export default function MenuList() {
                             marginTop: 20,
                             borderRadius: 5,
                         }}
+                        // eslint-disable-next-line no-underscore-dangle
+                        onPress={() => handleSubmit(item._id)}
                     >
                         <Text style={styles.title}>{item.name}</Text>
                         <View style={styles.dates}>
